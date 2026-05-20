@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微光引導所 ｜ 深夜樹洞</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+            background: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #1e1b4b 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .card-container {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 45px 35px;
+            border-radius: 16px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+        }
+        
+        h1 { 
+            color: #f8fafc; 
+            font-size: 20px; 
+            font-weight: 500; 
+            letter-spacing: 3px; 
+            margin-bottom: 8px; 
+        }
+        .subtitle { 
+            color: #94a3b8; 
+            font-size: 13px; 
+            letter-spacing: 1.5px; 
+            margin-bottom: 30px; 
+            line-height: 1.6;
+        }
+
+        .card-display {
+            background: rgba(3, 7, 18, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 40px 25px;
+            margin: 25px 0;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.6s ease;
+        }
+        
+        .fade-blur {
+            animation: fadeBlurAnim 0.8s ease-in-out;
+        }
+        @keyframes fadeBlurAnim {
+            0% { opacity: 0.2; filter: blur(6px); transform: scale(0.99); }
+            100% { opacity: 1; filter: blur(0); transform: scale(1); }
+        }
+
+        .card-title { font-size: 16px; font-weight: 500; color: #a5b4fc; margin-bottom: 18px; letter-spacing: 1.5px; }
+        .section-title { font-weight: bold; color: #cbd5e1; margin-top: 10px; margin-bottom: 4px; font-size: 13.5px; text-align: left; }
+        .card-text { font-size: 13px; color: #94a3b8; line-height: 1.8; text-align: justify; letter-spacing: 0.8px; margin-bottom: 12px; }
+        .solution-text { font-size: 13px; color: #cbd5e1; line-height: 1.8; text-align: justify; letter-spacing: 0.8px; background: rgba(255,255,255,0.02); padding: 10px 12px; border-left: 2px solid #a5b4fc; border-radius: 0 4px 4px 0; }
+        
+        button {
+            background: transparent;
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        button:hover { 
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.05); 
+            border-color: #a5b4fc;
+        }
+        
+        .chat-info { 
+            margin-top: 35px; 
+            font-size: 14px; 
+            color: #cbd5e1; 
+            display: none; 
+            line-height: 1.8; 
+            animation: fadeIn 1.5s ease-in-out forwards; 
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 25px;
+        }
+        .warm-quote { 
+            color: #f8fafc; 
+            font-weight: 400; 
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .highlight { color: #94a3b8; font-size: 13px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <h1>微光引導所 ｜ 深夜樹洞</h1>
+        <div class="subtitle">讓大腦退回安靜的角落，在這裡，容許一切失序。</div>
+        
+        <div class="card-display" id="cardDisplay">
+            <p style="color: #475569; font-style: italic; font-size: 13px; letter-spacing: 1px;">
+                ── 靜候呼吸平穩，當你準備好時 ──<br><br>凝視並翻開指引
+            </p>
+        </div>
+
+        <button onclick="drawCard()">翻開字卡</button>
+
+        <div class="chat-info" id="chatInfo">
+            <p class="warm-quote">✨ 每一張牌卡，都是你的一種狀態。<br>願你無論身在何處，都能好好對待自己。</p>
+            <p class="highlight">解方只是一個起點。如果這段對話讓你想到了什麼，抬起頭，我們聊聊吧。</p>
+        </div>
+    </div>
+
+    <script>
+        const cards = [
+            { 
+                title: "✦ 關於【潮汐】的時序", 
+                text: "萬物皆有其週期。暫時的停滯或退後，並不是失去前進的能力，而是如同海潮一樣，在靜謐中為下一次的推進蓄力。容許自己現在正處於落潮的狀態，這也是一種前進。",
+                sol: "【深夜解方】請對自己說一句：『現在休息，是完全沒問題的。』今天試著把清單上的代辦事項減少一項，空下來的時間什麼都別做。允許自己落後世界一陣子，海潮終究會再度湧來。"
+            },
+            { 
+                title: "✦ 關於【起霧的鏡面】", 
+                text: "我們往往花太多時間透過旁人的目光去確認自己，但那些折射多半帶著主觀的偏差，幕後就像隔著起霧的鏡面。你是不是太在意某個特定的人對你的評價，而忘了自己原本發光的樣子？",
+                sol: "【深夜解方】旁人的評價只是他們的主觀投射，並不等於你的全貌。試著拿出一張紙，寫下三個『你很喜歡自己的優點』（哪怕是很小的事，比如很會照顧植物）。主權在你自己手裡，不在鏡子裡。"
+            },
+            { 
+                title: "✦ 關於【防禦的針刺】", 
+                text: "為了避免柔軟的內心再次被環境或他人劃傷，我們有時會不自覺地對外築起冷漠的防線。那些防備確實保護了你，但也可能把你關在與外界隔絕的深夜裡。要一直裝作不在乎，這陣子辛苦你了。",
+                sol: "【深夜解方】長出刺並不是你的錯，這說明你曾受過傷，懂得自我保護。今天，不需要對全世界卸下防衛，但試著對一個你相對信任的人，傳一個帶有真實情緒的貼圖或訊息。慢慢來，安全感是一點一滴蓋起來的。"
+            },
+            { 
+                title: "✦ 關於【手心的沙漏】", text: "有些事情，越是試圖用力握緊，越容易在焦慮的指縫間無聲流逝。不論是一段勉強的友誼、還是還沒到來的未來。學會輕輕鬆開手，不是放棄，而是讓心靈擁有足夠的空間去承接更適合你的重量。",
+                sol: "【深夜解方】當你發現自己又在糾結那些無法控制的事情時，深呼吸，將雙手緊握再完全張開。告訴自己：『我已經做了我能做的，剩下的，我選擇交給時間。』放手，才是掌控的開始。"
+            },
+            { 
+                title: "✦ 關於【安靜的聚光燈】", text: "你是不是總扮演著那個懂事、不會出錯、隨時準備好支援大家的完美角色？但這張牌想提醒你，舞台底下的觀察者，其實大多也在專注自己的劇本。你身上的聚光燈，很多時候是自己架設的。",
+                sol: "【深夜解方】你不需要永遠當一個情緒完美的容器。今天試著做一件『就算出糗也無所謂』的小事，或者主動拒絕一個你其實不想答應的請求。相信我，世界不會因為你的一次不完美而崩塌。"
+            },
+            { 
+                title: "✦ 關於【未寄出的信箋】", text: "心底最深處，或許正存放著一封找不到收件人、或是不知道該如何開頭的信。那些沉澱太久、沒能說出口的話，久了會變成心頭的雨。積壓的情緒，正在尋找一個安全的出口。",
+                sol: "【深夜解方】那些無法對當事人說的話，不需要勉強寄出。今晚，在手機記事本裡毫無保留地把它打出來，把所有的委屈和憤怒寫下來，然後不要傳送，直接刪除或封存。文字有洗滌心靈的力量，寫下來，它就被安放了。"
+            },
+            { 
+                title: "✦ 關於【齒輪的間隙】", text: "再緊密的機械，也需要留出微小的空隙才能順暢運轉；緊繃過度的琴弦，往往最容易斷裂。你最近是不是把自己的時間和情緒逼得太緊了？總覺得如果不往前跑，就會被世界拋下。",
+                sol: "【深夜解方】請設定一個『絕對神聖的時間』，例如洗澡後的30分鐘，或者睡前的半小時。在這段時間裡，關掉所有通知，不回任何訊息，不看任何教材。這不是懶惰，這是你大腦的維護工程。"
+            },
+            { 
+                title: "✦ 關於【身後的陰影】", text: "光線越是強烈、要求自己表現得越完美的場合，身後拖曳的影子就越沉重。當你在眾人面前展現開朗、幽默與體貼時，那些被留下來的疲憊與無助，被你藏去哪裡了呢？",
+                sol: "【深夜解方】接納自己的陰暗面，是完整的開始。今晚到家後，允許自己擺出一張疲憊、不好看的臉，不笑也沒關係。跟自己說一句：『撐了一天，辛苦了。現在在我自己的樹洞裡，我可以不用再討好任何人。』"
+            },
+            { 
+                title: "✦ 關於【海上的漂流木】", text: "在巨大的群體與社會環境中，隨波逐流有時讓人感到無比的虛無與窒息。你現在的疲憊，是因為你正勉強自己配合海浪的方向，去融入那些你其實不太舒服的圈子。",
+                sol: "【深夜解方】與其耗費力氣去配合不屬於你的海浪，不如把力氣拿來尋找能讓你安心靠岸的沙灘。今天，縮小你的社交圈，把注意力和時間，只留給一兩個真正懂你、跟他們相處不需要假裝的朋友身上。"
+            },
+            { 
+                title: "✦ 關於【遲到的雨季】", text: "乾涸許久的大地，只是在等待一場遲到的雨。你最近的焦慮，可能來自於看見旁人前進（例如別人的成績、人際、成就）而產生的自我懷疑。但每個人都有自己的時序，你只是在等待屬於你的那陣風。",
+                sol: "【深夜解方】心理學上有個概念叫『社會比較』，這是焦慮的根源。今天起，嘗試進行『數位排毒』，減少觀看他人光鮮亮麗的社群動態。把目光收回來，專注在自己今天比昨天多弄懂的一個知識點就好。"
+            },
+            { 
+                title: "✦ 關於【錯位的拼圖】", text: "勉強自己塞進一個不合適的社交圈或關係裡，只會讓原本獨特的邊角在摩擦中傷痕累累。如果某個環境讓你感到無比壓抑，或許並不是你不好，而是這張拼圖，本就不該屬於這個位置。",
+                sol: "【深夜解方】停止對不對頻的人進行無效的磨合。優雅地退回禮貌的社交距離即可。你要相信，世界上一定有一個位置，不需要你削足履適，就能完美地把你承接進去。保持你原本的形狀，去尋找對的圖幅。"
+            },
+            { 
+                title: "✦ 關於【燃燒的營火】", text: "為了照顧周遭人的情緒、維持團體的和諧，你像一束營火般不斷燃燒自己，去溫暖每個人，甚至快要耗盡最後的木柴。但在溫暖別人之前，你今天有沒有回過頭，好好抱一抱那個已經開始發冷、精疲力竭的自己？",
+                sol: "【深夜解方】請建立你的『情緒界線』。當別人再次向你傾倒負能量、或提出為難的請求時，在心裡默數三秒，溫柔但堅定地回應：『我現在手邊剛好有點事，可能沒辦法及時幫你。』保護自己的燃料，你才能燒得更久。"
+            },
+            { 
+                title: "✦ 關於【失衡的天平】", text: "左邊放著旁人的期待、外界的標準；右邊放著你內心真正的渴望與疲憊。你是不是在不自覺中，把所有的籌碼都加在了左邊，導致內心失去了平衡？當天平傾斜時，受傷最重的終究是自己。",
+                sol: "【深夜解方】今晚，在右邊的盒子裡加上一枚沉重的籌碼——做一件純粹為了讓自己高興、沒有任何功利目的的事（哪怕是吃一碗罪惡的宵夜、或看一集喜歡的劇）。告訴自己：『這是我應得的，我最重要。』"
+            },
+            { 
+                title: "✦ 關於【按下的暫停鍵】", text: "世界運行的腳步太快，每個人都在催促你給出成果。但這張牌今晚想溫柔地拉住你：按下一天、一個晚上的暫停鍵，並不會摧毀你的未來。你以為的落後，其實只是心靈在調整呼吸。",
+                sol: "【深夜解方】給自己做一個實體或心理的『暫停手勢』。今晚閉上眼睛睡覺前，對所有還沒寫完的作業、還沒解決的煩惱說：『今天就到這裡，我現在要全面下線了。』允許大腦徹底關機，明天的事，明天再說。"
+            },
+            { 
+                title: "✦ 關於【保護內心的殼】", text: "躲在厚重的保護殼裡雖然安全，但同時也阻絕了陽光與微風的進入。你最近的冷淡或退縮，是不是因為害怕再次在人際關係中受傷？但一直待在黑暗裡，傷口是不容易好起來的。",
+                sol: "【深夜解方】不需要一下子把殼敲碎，那太冒險了。試著把殼開一條小小的縫隙——比如，今天在學校遇到認識的人時，主動給對方一個微小的點頭或微笑。讓外界的一絲微光透進來，你會發現世界其實沒有想像中那麼可怕。"
+            },
+            { 
+                title: "✦ 關於【深夜的迴聲】", text: "我們對內心說的話，往往會變成一種自我的內在預言。如果你每天都對自己灌輸『我不夠好』、『我做不好』，大腦就會選擇放棄。你對自己，是不是比對任何人都還要刻薄、還要嚴厲？",
+                sol: "【深夜解方】從現在開始，更換你的內在台詞。每次腦袋裡出現指責自己的聲音時，立刻用第三人稱安慰自己：『（你的名字），你今天其實已經做得很好了，換作別人不一定撐得住。』像對待你最好的朋友那樣，溫柔地對待自己。"
+            }
+        ];
+
+        function drawCard() {
+            const cardDisplay = document.getElementById('cardDisplay');
+            
+            cardDisplay.classList.remove('fade-blur');
+            void cardDisplay.offsetWidth; 
+            cardDisplay.classList.add('fade-blur');
+
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * cards.length);
+                const selectedCard = cards[randomIndex];
+
+                cardDisplay.innerHTML = `
+                    <div class="card-title">${selectedCard.title}</div>
+                    <div class="section-title">🔮 微光映射</div>
+                    <div class="card-text">${selectedCard.text}</div>
+                    <div class="solution-text">${selectedCard.sol}</div>
+                `;
+
+                document.getElementById('chatInfo').style.display = 'block';
+            }, 150);
+        }
+    </script>
+
+</body>
+</html>
